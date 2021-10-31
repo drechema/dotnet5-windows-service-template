@@ -37,12 +37,32 @@ This command should create the needed files and the `Workerservice.exe` file (on
 dotnet publish --runtime win-x64 --configuration Release --output c:\tmp\DemoService --self-contained
 ```
 
-### Define windows service
+### Register the service
 
-Form the target machine suppose you have all the files in the directory `c:\tmp\DemoService`. Then open Power Shell as **Administrator** and execute the command from `C:\WINDOWS\system32`:
+From the target machine suppose you have all the files in the directory `c:\tmp\DemoService`. Then open Power Shell as **Administrator** and execute the next command from `C:\WINDOWS\system32` directory:
 
 ```bash
- sc.exe create DemoService binpath=  C:\tmp\DemoService\WorkerService.exe start= auto
+sc.exe create DemoService binpath=  C:\tmp\DemoService\WorkerService.exe start= auto
 ```
 
-This command will define a new Windows Service `DemoService` visible in the Windows Services Management tool. You can start and stop this service from this tool. Remenber that you have to define the `appsettings.json` file in the servce directory. Also in this file any path that is defined must be a complete path and not relative. This is because the working directory for a Windows service is `C:\WINDOWS\system32`.
+This command will register a new Windows Service `DemoService` visible in the Windows Services Management tool. You can start and stop this service from this tool. Remenber that you have to define the `appsettings.json` file in the servce directory. Also in this file any path that is defined must be a complete path and not relative. This is because the working directory for a Windows service is `C:\WINDOWS\system32`.
+
+### Start and Stop from shell
+
+You can also use `sc.exe` to start or stop the service using option `start` or `stop`.
+
+### Checking status from shell
+
+You can check the service status from shell using
+
+```bash
+sc.exe query DemoService
+```
+
+### Unregister the service
+
+You can unregister the service using
+
+```bash
+sc.exe delete DemoService
+```
