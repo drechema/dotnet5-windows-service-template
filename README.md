@@ -11,6 +11,7 @@ dotnet new worker
 This project is using dotnet framework version 5, but should works also using version 3. A nice thing of using dotnet framework is that is multplatform, at least for development you can use Mac or linux. The service is going to work starting it from command line (from project directory):
 
 ```bash
+dotnet restore
 dotnet run
 ```
 
